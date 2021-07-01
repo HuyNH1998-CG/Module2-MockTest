@@ -17,16 +17,16 @@ public class StudentManagement {
     }
 
     private static String getAverageScore() {
-        while(true){
-            try{
+        while (true) {
+            try {
                 System.out.println("Điểm trung bình");
                 String avgScore = input.nextLine();
-                if(ScoreRegex.validate(avgScore)){
-                   return avgScore;
+                if (ScoreRegex.validate(avgScore)) {
+                    return avgScore;
                 } else {
                     throw new Exception();
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.err.println("Điểm trung bình phải là số");
             }
         }
@@ -38,28 +38,28 @@ public class StudentManagement {
     }
 
     private static String getGender() {
-        while(true){
-            try{
+        while (true) {
+            try {
                 System.out.println("Giới tính");
                 String gender = input.nextLine();
-                if(GenderRegex.validate(gender)){
-                   return gender;
+                if (GenderRegex.validate(gender)) {
+                    return gender;
                 } else {
                     throw new Exception();
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.err.println("Giới tính phải là nam hoặc nữ");
             }
         }
     }
 
     private static String getAge() {
-        while(true){
-            try{
+        while (true) {
+            try {
                 System.out.println("Tuổi");
                 String age = input.nextLine();
-                if(AgeRegex.validate(age)){
-                    if (Integer.parseInt(age)<18 || Integer.parseInt(age)>70){
+                if (AgeRegex.validate(age)) {
+                    if (Integer.parseInt(age) < 18 || Integer.parseInt(age) > 70) {
                         throw new AgeException();
                     } else {
                         return age;
@@ -67,9 +67,9 @@ public class StudentManagement {
                 } else {
                     throw new Exception();
                 }
-            }catch (AgeException age){
+            } catch (AgeException age) {
                 System.err.println("Người này quá già hoặc quá trẻ để đi học");
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.err.println("Tuổi phải là số");
             }
         }
@@ -96,7 +96,7 @@ public class StudentManagement {
         String idToChange = input.nextLine();
         int index = -1;
         for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getStudentID().equals(idToChange)){
+            if (students.get(i).getStudentID().equals(idToChange)) {
                 index = i;
                 break;
             }
@@ -115,7 +115,14 @@ public class StudentManagement {
     public static void delete() {
         System.out.println("Nhập mã sinh viên của sinh viên cần xóa");
         String idToDelete = input.nextLine();
-        students.removeIf(student -> student.getStudentID().equals(idToDelete));
+        System.out.println("WARNING!!!");
+        System.out.println("Bạn có thật sự muốn xóa không");
+        System.out.println("1.Có");
+        System.out.println("2.Không");
+        int choice = Integer.parseInt(input.nextLine());
+        if (choice == 1) {
+            students.removeIf(student -> student.getStudentID().equals(idToDelete));
+        }
     }
 
     public static void sort() {
@@ -126,7 +133,7 @@ public class StudentManagement {
         students = IOOperator.readFile();
     }
 
-    public static void writeToFile(){
+    public static void writeToFile() {
         IOOperator.writeFile();
     }
 }
